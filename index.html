@@ -1,0 +1,481 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NRHN × MOHA</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #fff;
+  background:
+    radial-gradient(ellipse at 20% 10%, #302957 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 70%, #202e52 0%, transparent 45%),
+    linear-gradient(140deg, #090c19, #14182c, #090c19);
+  overflow-x: hidden;
+  line-height: 1.7;
+}
+
+/* خلفية النجوم */
+.stars {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    radial-gradient(2px 2px at 15% 25%, #fff, transparent),
+    radial-gradient(2px 2px at 75% 15%, #fff, transparent),
+    radial-gradient(1px 1px at 45% 65%, #fff, transparent),
+    radial-gradient(2px 2px at 85% 80%, #fff, transparent),
+    radial-gradient(1px 1px at 25% 85%, #fff, transparent);
+  background-size: 300px 300px;
+  opacity: .5;
+  animation: twinkle 6s ease-in-out infinite alternate;
+}
+
+@keyframes twinkle {
+  from { opacity: .2; }
+  to { opacity: .7; }
+}
+
+/* القائمة العلوية */
+.nav-container {
+  position: fixed;
+  top: 18px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 100;
+  padding: 0 12px;
+}
+
+nav {
+  display: flex;
+  gap: 5px;
+  padding: 8px;
+  border-radius: 50px;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.08);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  box-shadow: 0 10px 40px rgba(0,0,0,.2);
+}
+
+nav a {
+  text-decoration: none;
+  color: #d8d6e8;
+  padding: 9px 14px;
+  font-size: 13px;
+  border-radius: 30px;
+  white-space: nowrap;
+  transition: .3s;
+}
+
+nav a:hover {
+  color: white;
+  background: rgba(193,173,255,.2);
+}
+
+/* الصفحة */
+main {
+  position: relative;
+  z-index: 1;
+  width: min(880px, calc(100% - 36px));
+  margin: auto;
+}
+
+section {
+  min-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 110px 0 70px;
+  scroll-margin-top: 70px;
+}
+
+.hero {
+  min-height: 100vh;
+  align-items: center;
+  text-align: center;
+  padding-top: 125px;
+}
+
+.eyebrow {
+  color: #c8b8ff;
+  letter-spacing: 4px;
+  font-size: 11px;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+}
+
+h1 {
+  font-size: clamp(32px, 7vw, 55px);
+  font-weight: 500;
+  letter-spacing: -2px;
+  line-height: 1.2;
+  margin-bottom: 15px;
+}
+
+h2 {
+  font-size: clamp(27px, 5vw, 39px);
+  font-weight: 500;
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+p {
+  color: #c1c1d1;
+  font-size: 16px;
+  max-width: 680px;
+}
+
+.hero p {
+  max-width: 500px;
+}
+
+/* القلب */
+.heart-container {
+  width: min(75vw, 300px);
+  margin-bottom: 35px;
+  filter: drop-shadow(0 0 25px rgba(190,160,255,.3));
+  animation: float 4s ease-in-out 3.5s infinite;
+}
+
+.heart-svg {
+  width: 100%;
+  overflow: visible;
+}
+
+.heart-path {
+  fill: rgba(192,170,255,.06);
+  stroke: #d9caff;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1100;
+  stroke-dashoffset: 1100;
+  animation: draw 3.5s ease forwards;
+}
+
+.heart-text {
+  opacity: 0;
+  fill: white;
+  font-size: 21px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-anchor: middle;
+  dominant-baseline: middle;
+  animation: showName 1s ease 3.2s forwards;
+}
+
+@keyframes draw {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes showName {
+  to { opacity: 1; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+/* البطاقات الزجاجية */
+.card {
+  position: relative;
+  padding: clamp(25px, 6vw, 48px);
+  border-radius: 28px;
+  border: 1px solid rgba(255,255,255,.15);
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,.11),
+    rgba(255,255,255,.035)
+  );
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  box-shadow: 0 25px 70px rgba(0,0,0,.2);
+}
+
+.card p + p {
+  margin-top: 14px;
+}
+
+.number {
+  color: #a99bdb;
+  font-size: 12px;
+  letter-spacing: 3px;
+  margin-bottom: 20px;
+}
+
+.line {
+  width: 50px;
+  height: 1px;
+  margin: 25px 0;
+  background: linear-gradient(90deg, #c8b8ff, transparent);
+}
+
+/* الأزرار */
+.discover {
+  display: inline-block;
+  margin-top: 35px;
+  padding: 12px 23px;
+  border-radius: 30px;
+  border: 1px solid rgba(255,255,255,.2);
+  color: white;
+  text-decoration: none;
+  background: rgba(255,255,255,.07);
+  transition: .3s;
+}
+
+.discover:hover {
+  background: rgba(200,180,255,.2);
+  transform: translateY(3px);
+}
+
+button {
+  margin-top: 25px;
+  padding: 13px 22px;
+  border-radius: 30px;
+  border: 1px solid rgba(205,185,255,.4);
+  background: rgba(190,170,255,.13);
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: .3s;
+}
+
+button:hover {
+  background: rgba(190,170,255,.25);
+  transform: translateY(-3px);
+}
+
+#surprise {
+  display: none;
+  margin-top: 20px;
+  color: #e5dcff;
+  animation: appear .6s ease;
+}
+
+#surprise.visible {
+  display: block;
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* النهاية */
+footer {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 75px 15px 45px;
+}
+
+.german {
+  font-size: clamp(27px, 5vw, 37px);
+  color: #e1d5ff;
+  text-shadow: 0 0 25px rgba(190,160,255,.4);
+}
+
+.signature {
+  color: #9293aa;
+  font-size: 11px;
+  letter-spacing: 4px;
+  margin-top: 10px;
+}
+
+@media(max-width: 500px) {
+  nav {
+    gap: 0;
+    padding: 6px;
+  }
+
+  nav a {
+    padding: 8px 10px;
+    font-size: 11px;
+  }
+}
+
+@media(prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="stars"></div>
+
+<!-- MENU -->
+<div class="nav-container">
+  <nav>
+    <a href="#accueil">Accueil</a>
+    <a href="#mots">Quelques mots</a>
+    <a href="#pardon">Pardon</a>
+    <a href="#surprise-section">Surprise</a>
+  </nav>
+</div>
+
+<main>
+
+  <!-- ACCUEIL -->
+  <section class="hero" id="accueil">
+
+    <div class="heart-container">
+      <svg class="heart-svg" viewBox="0 0 300 280">
+        <path class="heart-path"
+          d="M150 250
+          C125 225 35 160 35 90
+          C35 30 105 20 140 65
+          C145 72 149 78 150 85
+          C151 78 155 72 160 65
+          C195 20 265 30 265 90
+          C265 160 175 225 150 250 Z"/>
+
+        <text class="heart-text" x="150" y="137">NRHN</text>
+      </svg>
+    </div>
+
+    <div class="eyebrow">Un petit message pour Nourhene</div>
+
+    <h1>Quelques mots,<br>tout simplement.</h1>
+
+    <p>Une petite attention, sans grand discours.</p>
+
+    <a href="#mots" class="discover">
+      Découvrir ↓
+    </a>
+
+  </section>
+
+  <!-- QUELQUES MOTS -->
+  <section id="mots">
+
+    <div class="card">
+
+      <div class="number">01 / QUELQUES MOTS</div>
+
+      <div class="eyebrow">Une pensée</div>
+
+      <h2>Un petit compliment.</h2>
+
+      <p>
+        Je voulais simplement te dire que je te trouve vraiment jolie.
+      </p>
+
+      <p>
+        Et même quand on est en train de parler,
+        il m'arrive de penser à toi et de me perdre
+        un peu dans mes pensées.
+      </p>
+
+      <div class="line"></div>
+
+      <p>
+        C'est tout, je voulais juste que tu le saches.
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- PARDON -->
+  <section id="pardon">
+
+    <div class="card">
+
+      <div class="number">02 / UN PETIT PARDON</div>
+
+      <div class="eyebrow">À propos de cette nuit-là</div>
+
+      <h2>Je voulais te dire...</h2>
+
+      <p>
+        Je suis désolé pour le malentendu qui a eu lieu
+        cette nuit-là. J'espère que tu accepteras mes excuses,
+        parce que tu comptes vraiment beaucoup pour moi,
+        même si cela ne fait que deux semaines
+        que nous nous connaissons.
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- SURPRISE -->
+  <section id="surprise-section">
+
+    <div class="card">
+
+      <div class="number">03 / UNE PETITE SURPRISE</div>
+
+      <div class="eyebrow">Juste pour le sourire</div>
+
+      <h2>Une dernière petite chose.</h2>
+
+      <p>
+        Il y a parfois des attentions qui n'ont pas
+        besoin de beaucoup de mots.
+      </p>
+
+      <button id="surprise-button">
+        Découvrir la surprise ✦
+      </button>
+
+      <p id="surprise">
+        J'espère que ce petit message t'aura fait sourire.
+        Passe une très belle journée. ✨
+      </p>
+
+    </div>
+
+  </section>
+
+</main>
+
+<!-- FIN -->
+<footer>
+
+  <div class="german">
+    Ich liebe dich.
+  </div>
+
+  <div class="signature">
+    NRHN × MOHA
+  </div>
+
+</footer>
+
+<script>
+const button = document.getElementById("surprise-button");
+const surprise = document.getElementById("surprise");
+
+button.addEventListener("click", () => {
+  surprise.classList.add("visible");
+  button.textContent = "Surprise découverte ✓";
+  button.disabled = true;
+});
+</script>
+
+</body>
+</html>
